@@ -84,12 +84,12 @@ class _CameraOCRScreenState extends State<CameraOCRScreen> {
                     // debugPrint('data recognizedText ${recognizedText.text}');
                     Navigator.pop(context);
                   },
-                  // onKTPDetected: (KTPData ktpData) {
-                  //   debugPrint('data ktpData ${ktpData.toJson()}');
-                  // },
-                  // onSIMDetected: (SIMData simData) {
-                  //   // debugPrint('data simData ${simData.toJson()}');
-                  // },
+                  onKTPDetected: (KTPData ktpData) {
+                    debugPrint('data ktpData ${ktpData.toJson()}');
+                  },
+                  onSIMDetected: (SIMData simData) {
+                    debugPrint('data simData ${simData.toJson()}');
+                  },
                   onLoading: (bool isLoading) {
                     debugPrint('isLoading now $isLoading');
                     setState(() {

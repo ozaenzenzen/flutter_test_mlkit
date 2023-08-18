@@ -42,11 +42,12 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+        child: Container(
+          alignment: Alignment.center,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
             children: [
               (dataGambar != null)
                   ? Container(
@@ -62,7 +63,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ? Text(
                       "dataOcr $dataOcr",
                     )
-                  : const SizedBox(),
+                  : SizedBox(
+                      height: MediaQuery.of(context).size.height * .35,
+                    ),
               Text(
                 "Flutter Test Liveness",
                 style: GoogleFonts.mukta(),
@@ -116,6 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onPressed: () {
                       setState(() {
                         dataOcr = null;
+                        dataGambar = null;
                       });
                       Navigator.push(
                         context,
@@ -124,10 +128,18 @@ class _HomeScreenState extends State<HomeScreen> {
                             return CameraOCRScreen(
                               testMode: true,
                               callback: (String? textDetected) {
-                                debugPrint('data');
                                 setState(() {
                                   dataOcr = textDetected;
                                 });
+                              },
+                              callbackImage: (String? image) {
+                                if (image == null || image == "") {
+                                  // 
+                                } else {
+                                  setState(() {
+                                    dataGambar = image;
+                                  });
+                                }
                               },
                             );
                           },

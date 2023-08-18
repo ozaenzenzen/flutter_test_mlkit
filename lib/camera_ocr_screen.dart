@@ -6,10 +6,12 @@ import 'package:saas_mlkit/saas_mlkit.dart';
 class CameraOCRScreen extends StatefulWidget {
   final bool testMode;
   final Function(String? textDetected)? callback; 
+  final Function(String? image)? callbackImage; 
 
   const CameraOCRScreen({
     super.key,
     this.callback,
+    this.callbackImage,
     this.testMode = false,
   });
 
@@ -77,7 +79,10 @@ class _CameraOCRScreenState extends State<CameraOCRScreen> {
                     cameraController = controller;
                   },
                   onTakePict: (String base64Image) {
-                    debugPrint('data base64Image $base64Image');
+                    // debugPrint('data base64Image $base64Image');
+                  },
+                  croppedFaceCard: (String? base64Image) {
+                    widget.callbackImage?.call(base64Image);
                   },
                   onTextDetected: (RecognizedText recognizedText) {
                     widget.callback?.call(recognizedText.text);

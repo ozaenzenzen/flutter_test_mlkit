@@ -103,6 +103,12 @@ class _CameraLivenessScreenState extends State<CameraLivenessScreen> {
                     });
                     debugPrint("onBlinkDetected");
                   },
+                  onShakeHeadDetected: (face) {
+                    setState(() {
+                      currentAction = 'onShakeHeadDetected';
+                    });
+                    debugPrint("onShakeHeadDetected");
+                  },
                   onFaceDetected: (face) {
                     debugPrint("onFaceDetected");
                   },

@@ -95,6 +95,9 @@ class _CameraOCRScreenState extends State<CameraOCRScreen> {
                   onSIMDetected: (SIMData simData) {
                     debugPrint('data simData ${simData.toJson()}');
                   },
+                  onPassportDetected: (UserDataFromPassportModel passportData) {
+                    debugPrint('data passportData ${passportData.toJson()}');
+                  },
                   onLoading: (bool isLoading) {
                     debugPrint('isLoading now $isLoading');
                     setState(() {

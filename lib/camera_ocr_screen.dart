@@ -5,8 +5,8 @@ import 'package:saas_mlkit/saas_mlkit.dart';
 
 class CameraOCRScreen extends StatefulWidget {
   final bool testMode;
-  final Function(String? textDetected)? callback; 
-  final Function(String? image)? callbackImage; 
+  final Function(String? textDetected)? callback;
+  final Function(String? image)? callbackImage;
 
   const CameraOCRScreen({
     super.key,
@@ -43,36 +43,25 @@ class _CameraOCRScreenState extends State<CameraOCRScreen> {
           ? Stack(
               children: [
                 SaasOCRCamera(
-                  captureButton: SizedBox(
-                    height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 64,
-                          height: 64,
-                          alignment: Alignment.bottomCenter,
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
-                          ),
-                          child: Center(
-                            child: Container(
-                              margin: const EdgeInsets.all(6.81),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  color: const Color(0xFF6F6F6F),
-                                  width: 2,
-                                ),
-                              ),
-                            ),
+                  captureButton: Container(
+                    width: 64,
+                    height: 64,
+                    alignment: Alignment.bottomCenter,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: Container(
+                        margin: const EdgeInsets.all(6.81),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: const Color(0xFF6F6F6F),
+                            width: 2,
                           ),
                         ),
-                        const SizedBox(height: 40),
-                      ],
+                      ),
                     ),
                   ),
                   onControllerCreated: (controller) {

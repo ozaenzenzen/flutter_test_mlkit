@@ -135,20 +135,27 @@ class _CameraLivenessScreenState extends State<CameraLivenessScreen> {
                     ),
                   ),
                 ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // actionTakePicture(context);
-                      actionTakePictureV2(context);
-                    },
-                    child: Text(
-                      'Take Picture',
-                      style: GoogleFonts.mukta(
-                        color: Colors.white,
-                        fontSize: 16,
+                SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          // actionTakePicture(context);
+                          actionTakePictureV2(context);
+                        },
+                        child: Text(
+                          'Take Picture',
+                          style: GoogleFonts.mukta(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
                       ),
-                    ),
+                      const SizedBox(height: 50),
+                    ],
                   ),
                 ),
               ],

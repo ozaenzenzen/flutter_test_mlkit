@@ -4,6 +4,10 @@
         android:label="flutter_test_saas_mlkit"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data
+          android:name="com.google.mlkit.vision.DEPENDENCIES"
+          android:value="ocr,face" />
+        <activity android:name="id.mncinnovation.ocr.CaptureOCRActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

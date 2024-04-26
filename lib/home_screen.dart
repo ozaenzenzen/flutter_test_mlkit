@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test_saas_mlkit/camera_liveness_screen.dart';
 import 'package:flutter_test_saas_mlkit/camera_ocr_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mnc_identifier_ocr/mnc_identifier_ocr.dart';
+import 'package:mnc_identifier_ocr/model/ocr_result_model.dart';
 import 'package:saas_mlkit/saas_mlkit.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -134,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                               callbackImage: (String? image) {
                                 if (image == null || image == "") {
-                                  // 
+                                  //
                                 } else {
                                   setState(() {
                                     dataGambar = image;
@@ -208,6 +210,40 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ],
+              ),
+              const SizedBox(width: 15),
+              ElevatedButton(
+                onPressed: () async {
+                  try {
+                    OcrResultModel res = await MncIdentifierOcr.startCaptureKtp(withFlash: true, cameraOnly: true);
+                    debugPrint('result: ${res.toJson()}');
+                  } catch (e) {
+                    debugPrint('something goes wrong $e');
+                  }
+                  // setState(() {
+                  //   dataGambar = null;
+                  // });
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) {
+                  //       return CameraLivenessScreen(
+                  //         testMode: true,
+                  //         callback: (String image) {
+                  //           setState(() {
+                  //             dataGambar = image;
+                  //           });
+                  //         },
+                  //       );
+                  //       // return const TextRecognizerView();
+                  //     },
+                  //   ),
+                  // );
+                },
+                child: Text(
+                  "Test Liveness NEW PACAKGE",
+                  style: GoogleFonts.mukta(),
+                ),
               ),
             ],
           ),

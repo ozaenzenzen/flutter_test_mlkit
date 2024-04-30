@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test_saas_mlkit/camera_liveness_screen.dart';
 import 'package:flutter_test_saas_mlkit/camera_ocr_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mnc_identifier_ocr/mnc_identifier_ocr.dart';
-import 'package:mnc_identifier_ocr/model/ocr_result_model.dart';
+// import 'package:mnc_identifier_ocr/mnc_identifier_ocr.dart';
+// import 'package:mnc_identifier_ocr/model/ocr_result_model.dart';
 import 'package:saas_mlkit/saas_mlkit.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -34,6 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String? dataOcr;
 
   String? dataGambar;
+  String? dataGambarCard;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,6 +52,16 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: [
+              (dataGambarCard != null)
+                  ? Container(
+                      height: 100,
+                      width: 100,
+                      color: Colors.blue,
+                      child: Image.memory(
+                        base64Decode(dataGambarCard!),
+                      ),
+                    )
+                  : const SizedBox(),
               (dataGambar != null)
                   ? Container(
                       height: 100,
@@ -63,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   : const SizedBox(),
               (dataOcr != null)
                   ? Text(
-                      "dataOcr $dataOcr",
+                      "dataOcr\n\n $dataOcr",
                     )
                   : SizedBox(
                       height: MediaQuery.of(context).size.height * .35,
@@ -122,6 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       setState(() {
                         dataOcr = null;
                         dataGambar = null;
+                        dataGambarCard = null;
                       });
                       Navigator.push(
                         context,
@@ -140,6 +152,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                 } else {
                                   setState(() {
                                     dataGambar = image;
+                                  });
+                                }
+                              },
+                              callbackImageCard: (String? image) {
+                                if (image == null || image == "") {
+                                  //
+                                } else {
+                                  setState(() {
+                                    dataGambarCard = image;
                                   });
                                 }
                               },
@@ -214,12 +235,12 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(width: 15),
               ElevatedButton(
                 onPressed: () async {
-                  try {
-                    OcrResultModel res = await MncIdentifierOcr.startCaptureKtp(withFlash: true, cameraOnly: true);
-                    debugPrint('result: ${res.toJson()}');
-                  } catch (e) {
-                    debugPrint('something goes wrong $e');
-                  }
+                  // try {
+                  //   OcrResultModel res = await MncIdentifierOcr.startCaptureKtp(withFlash: true, cameraOnly: true);
+                  //   debugPrint('result: ${res.toJson()}');
+                  // } catch (e) {
+                  //   debugPrint('something goes wrong $e');
+                  // }
                   // setState(() {
                   //   dataGambar = null;
                   // });

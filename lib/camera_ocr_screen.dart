@@ -7,11 +7,13 @@ class CameraOCRScreen extends StatefulWidget {
   final bool testMode;
   final Function(String? textDetected)? callback;
   final Function(String? image)? callbackImage;
+  final Function(String? image)? callbackImageCard;
 
   const CameraOCRScreen({
     super.key,
     this.callback,
     this.callbackImage,
+    this.callbackImageCard,
     this.testMode = false,
   });
 
@@ -25,8 +27,8 @@ class _CameraOCRScreenState extends State<CameraOCRScreen> {
 
   // @override
   // void dispose() {
-  //   cameraController!.dispose();
-  //   cameraController = null;
+  //   // cameraController!.dispose();
+  //   // cameraController = null;
   //   super.dispose();
   // }
 
@@ -69,6 +71,7 @@ class _CameraOCRScreenState extends State<CameraOCRScreen> {
                   },
                   onTakePict: (String base64Image) {
                     // debugPrint('data base64Image $base64Image');
+                    widget.callbackImageCard?.call(base64Image);
                   },
                   croppedFaceCard: (String? base64Image) {
                     widget.callbackImage?.call(base64Image);

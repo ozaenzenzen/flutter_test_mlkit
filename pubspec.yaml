@@ -32,7 +32,7 @@ dependencies:
     sdk: flutter
   google_fonts: 4.0.4
   camera: ^0.10.5+2
-  mnc_identifier_ocr: ^1.0.20
+  # mnc_identifier_ocr: ^1.0.20
   saas_mlkit:
     git:
       url: https://yustanj:XX4anzTGC3FKUYrA6yzd@bitbucket.org/loyaltoid/saas_ml_kit.git
@@ -56,6 +56,11 @@ dev_dependencies:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 dependency_overrides: 
+  # saas_mlkit:
+  #   git:
+  #     url: https://yustanj:XX4anzTGC3FKUYrA6yzd@bitbucket.org/loyaltoid/saas_ml_kit.git
+  #     # ref: 8ba0db559c33736ebc6d5fb7b8882e63f105cccb
+  #     ref: 9a81c0232ffd4ca132ea36c7f2bc6ba81e0bcf35
   saas_mlkit:
     path: ../saas_mlkit
 

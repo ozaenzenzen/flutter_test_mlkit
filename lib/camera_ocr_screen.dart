@@ -1,17 +1,21 @@
 import 'package:camera/camera.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_test_saas_mlkit/ocr_handler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:saas_mlkit/saas_mlkit.dart';
 
 class CameraOCRScreen extends StatefulWidget {
   final bool testMode;
   final Function(String? textDetected)? callback;
+  final Function(String? mapping)? callbackKTPMapping;
   final Function(String? image)? callbackImage;
   final Function(String? image)? callbackImageCard;
 
   const CameraOCRScreen({
     super.key,
     this.callback,
+    this.callbackKTPMapping,
     this.callbackImage,
     this.callbackImageCard,
     this.testMode = false,
@@ -76,13 +80,22 @@ class _CameraOCRScreenState extends State<CameraOCRScreen> {
                   croppedFaceCard: (String? base64Image) {
                     widget.callbackImage?.call(base64Image);
                   },
-                  onTextDetected: (RecognizedText recognizedText) {
-                    widget.callback?.call(recognizedText.text);
-                    // debugPrint('data recognizedText ${recognizedText.text}');
+                  onTextDetected: (RecognizedText recognizedText) async {
+                    KTPData? handler = await compute(
+                      OCRHandler().recognizedText,
+                      recognizedText,
+                    );
+                    debugPrint('data recognizedText ${handler?.toJson()}');
+                    widget.callback?.call(handler!.toJson().toString());
                     Navigator.pop(context);
+
+                    // widget.callback?.call(recognizedText.text);
+                    // // debugPrint('data recognizedText ${recognizedText.text}');
+                    // Navigator.pop(context);
                   },
                   onKTPDetected: (KTPData ktpData) {
                     debugPrint('data ktpData ${ktpData.toJson()}');
+                    widget.callbackKTPMapping?.call(ktpData.toJson().toString());
                   },
                   onSIMDetected: (SIMData simData) {
                     debugPrint('data simData ${simData.toJson()}');

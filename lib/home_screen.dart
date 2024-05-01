@@ -32,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int motionProgress = 0;
 
   String? dataOcr;
+  String? dataOcr2;
 
   String? dataGambar;
   String? dataGambarCard;
@@ -53,13 +54,18 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisSize: MainAxisSize.max,
             children: [
               (dataGambarCard != null)
-                  ? Container(
-                      height: 100,
-                      width: 100,
-                      color: Colors.blue,
-                      child: Image.memory(
-                        base64Decode(dataGambarCard!),
-                      ),
+                  ? Column(
+                      children: [
+                        Container(
+                          height: 300,
+                          width: 300,
+                          color: Colors.blue,
+                          child: Image.memory(
+                            base64Decode(dataGambarCard!),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                      ],
                     )
                   : const SizedBox(),
               (dataGambar != null)
@@ -73,12 +79,24 @@ class _HomeScreenState extends State<HomeScreen> {
                     )
                   : const SizedBox(),
               (dataOcr != null)
-                  ? Text(
-                      "dataOcr\n\n $dataOcr",
+                  ? Column(
+                      children: [
+                        Text(
+                          "dataOcr\n\n $dataOcr",
+                        ),
+                        const SizedBox(height: 10),
+                      ],
                     )
                   : SizedBox(
                       height: MediaQuery.of(context).size.height * .35,
                     ),
+              (dataOcr2 != null)
+                  ? Text(
+                      "dataOcr KTP Mapping\n\n $dataOcr2",
+                    )
+                  : SizedBox(
+                      // height: MediaQuery.of(context).size.height * .35,
+                      ),
               Text(
                 "Flutter Test Liveness",
                 style: GoogleFonts.mukta(),
@@ -132,6 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onPressed: () {
                       setState(() {
                         dataOcr = null;
+                        dataOcr2 = null;
                         dataGambar = null;
                         dataGambarCard = null;
                       });
@@ -144,6 +163,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               callback: (String? textDetected) {
                                 setState(() {
                                   dataOcr = textDetected;
+                                });
+                              },
+                              callbackKTPMapping: (mapping) {
+                                setState(() {
+                                  dataOcr2 = mapping;
                                 });
                               },
                               callbackImage: (String? image) {
